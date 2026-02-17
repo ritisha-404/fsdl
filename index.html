@@ -3,150 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Validation Form</title>
+    <title>My Portfolio</title>
     <style>
-        :root {
-            --primary: #6366f1;
-            --error: #ef4444;
-            --success: #22c55e;
-            --bg: #f8fafc;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            font-family: sans-serif;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #333;
         }
 
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
+        header {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
         }
 
-        h2 { margin-top: 0; color: #1e293b; text-align: center; }
-
-        .form-group { margin-bottom: 1.5rem; position: relative; }
-
-        label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #475569; }
-
-        input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            box-sizing: border-box;
-            transition: border-color 0.2s;
+        section {
+            margin-bottom: 40px;
         }
 
-        input:focus {
-            outline: none;
-            border-color: var(--primary);
-            ring: 2px solid var(--primary);
+        h1, h2 {
+            color: #1a1a1a;
         }
 
-        .error-msg {
-            color: var(--error);
+        .project-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: #eee;
+            padding: 2px 8px;
             font-size: 0.8rem;
-            margin-top: 0.25rem;
-            display: none;
+            border-radius: 4px;
         }
 
-        input.invalid { border-color: var(--error); }
-
-        button {
-            width: 100%;
-            padding: 0.75rem;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: opacity 0.2s;
+        footer {
+            font-size: 0.9rem;
+            color: #777;
+            text-align: center;
+            margin-top: 50px;
         }
-
-        button:hover { opacity: 0.9; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Create Account</h2>
-    <form id="registrationForm">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" placeholder="Enter username">
-            <div class="error-msg" id="userError">Username must be at least 3 characters.</div>
+    <header>
+        <h1>Your Name</h1>
+        <p>Frontend Developer & Tech Enthusiast</p>
+        <nav>
+            <a href="https://github.com/yourusername">GitHub</a> | 
+            <a href="mailto:your@email.com">Email</a>
+        </nav>
+    </header>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I build simple, functional websites. I'm currently learning JavaScript and web deployment using Git and GitHub Pages.</p>
+    </section>
+
+    <section id="projects">
+        <h2>My Projects</h2>
+        
+        <div class="project-card">
+            <h3>Modern Validation Form</h3>
+            <p>A sign-up form that checks for errors before submitting.</p>
+            <span class="tag">HTML</span> <span class="tag">CSS</span> <span class="tag">JavaScript</span>
+            <br><br>
+            <a href="#">View Code</a>
         </div>
 
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="email@example.com">
-            <div class="error-msg" id="emailError">Please enter a valid email address.</div>
+        <div class="project-card">
+            <h3>Personal Portfolio</h3>
+            <p>This website! A clean and simple way to show my work.</p>
+            <span class="tag">HTML</span> <span class="tag">CSS</span>
         </div>
+    </section>
 
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="••••••••">
-            <div class="error-msg" id="passError">Password must be at least 6 characters.</div>
-        </div>
-
-        <button type="submit">Sign Up</button>
-    </form>
-</div>
-
-<script>
-    const form = document.getElementById('registrationForm');
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        let isValid = true;
-
-        // Reset Styles
-        document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
-        document.querySelectorAll('input').forEach(el => el.classList.remove('invalid'));
-
-        // Username Validation
-        const username = document.getElementById('username');
-        if (username.value.length < 3) {
-            showError(username, 'userError');
-            isValid = false;
-        }
-
-        // Email Validation (Simple Regex)
-        const email = document.getElementById('email');
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email.value)) {
-            showError(email, 'emailError');
-            isValid = false;
-        }
-
-        // Password Validation
-        const password = document.getElementById('password');
-        if (password.value.length < 6) {
-            showError(password, 'passError');
-            isValid = false;
-        }
-
-        if (isValid) {
-            alert('🎉 Form submitted successfully!');
-            form.reset();
-        }
-    });
-
-    function showError(input, errorId) {
-        input.classList.add('invalid');
-        document.getElementById(errorId).style.display = 'block';
-    }
-</script>
+    <footer>
+        <p>&copy; 2026 Your Name</p>
+    </footer>
 
 </body>
 </html>
